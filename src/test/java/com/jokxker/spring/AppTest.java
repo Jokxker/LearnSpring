@@ -1,9 +1,12 @@
 package com.jokxker.spring;
 
+import com.jokxker.spring.introduction.MyConfig;
+import com.jokxker.spring.introduction.MyConfig2;
 import com.jokxker.spring.introduction.Person;
 import com.jokxker.spring.introduction.Pet;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import static org.junit.Assert.*;
@@ -126,6 +129,32 @@ public class AppTest
             Person person = context.getBean("personBean", Person.class);
             System.out.println(person.getName() + " " + person.getAge());
             System.out.println("Annotation value to worked");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Test
+    public void configWithJava() {
+        try(AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(MyConfig.class)) {
+            Person person = context.getBean("personBean", Person.class);
+            person.callYourPet();
+            System.out.println(person.getName() + " " + person.getAge());
+            System.out.println("Config with Java to worked");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Test
+    public void configWithJava2() {
+        try(AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(MyConfig2.class)) {
+            Person person = context.getBean("personBean", Person.class);
+            person.callYourPet();
+            System.out.println(person.getName() + " " + person.getAge());
+            System.out.println("Config with Java 2 to worked");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
